@@ -13,6 +13,6 @@ class ProductCommand extends WarehouseCLICommand {
         parent::init();
         // register your subcommand here ..
         $this->command('list', '\WarehouseCLI\Command\Product\ProductListCommand');
-        // $this->command('create', '\WarehouseCLI\Command\Product\ProductCreateCommand');
+        $this->command('create', '\WarehouseCLI\Command\Product\ProductCreateCommand');
     }
 }
