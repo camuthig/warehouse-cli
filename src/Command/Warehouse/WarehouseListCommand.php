@@ -17,18 +17,10 @@ class WarehouseListCommand extends WarehouseCLICommand {
 
     function execute()
     {
-        $logger = $this->logger;
-
-        //  Use curl to get the warehouse data
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_URL, 'http://localhost:8000/api/warehouses');
-        $result=curl_exec($ch);
-        curl_close($ch);
-
-        $result = json_decode($result, true);
+        // Create a client and send the request
+        $warehouses = $this->sendRequest('warehouses');
 
         $columns = ['id', 'name', 'address'];
-        $this->printGrid($columns, $result);
+        $this->printGrid($columns, $warehouses);
     }
 }
