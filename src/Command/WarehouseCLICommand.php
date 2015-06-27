@@ -1,6 +1,7 @@
 <?php namespace WarehouseCLI\Command;
 
 use CLIFramework\Command;
+use CLIFramework\Formatter;
 use Exception;
 use InvalidArgumentException;
 
@@ -12,8 +13,16 @@ abstract class WarehouseCLICommand extends Command {
      */
     private $serviceUrl;
 
+    /**
+     * A formatter for creating formatted messages on the CLI
+     * @var CLIFramework\Formatter
+     */
+    private $formatter;
+
     public function __construct() {
+        parent::__construct();
         $this->serviceUrl = 'http://localhost:8000/api/';
+        $this->formatter = new Formatter();
     }
 
     private function printGridErrorHandler($errno,$errstr) {

@@ -4,11 +4,6 @@ use WarehouseCLI\Command\WarehouseCLICommand;
 
 class WarehouseListCommand extends WarehouseCLICommand {
 
-    function init()
-    {
-        // register your subcommand here ..
-    }
-
     function options($opts)
     {
         // command options

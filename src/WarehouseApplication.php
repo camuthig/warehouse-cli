@@ -9,11 +9,13 @@ class WarehouseApplication extends Application
     public function options($opts)
     {
         $opts->add('v|verbose', 'Verbose logging');
+        parent::options($opts);
     }
 
     /* register your command here */
     public function init()
     {
+        parent::init();
         $this->command('warehouse', '\WarehouseCLI\Command\Warehouse\WarehouseCommand');
     }
 
