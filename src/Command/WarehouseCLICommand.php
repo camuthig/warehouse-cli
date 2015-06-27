@@ -25,9 +25,8 @@ abstract class WarehouseCLICommand extends Command {
         $this->formatter = new Formatter();
     }
 
-    private function printGridErrorHandler($errno,$errstr) {
+    public function printGridErrorHandler($errno,$errstr) {
         /* handle the issue */
-        $this->logger->error('SHIT SHIT SHIT');
         throw new Exception("Error Processing Request", 1);
     }
 
@@ -114,6 +113,14 @@ abstract class WarehouseCLICommand extends Command {
                 'Content-Length: ' . strlen($data_string)]
             );
         }
+
+        // Debug statements
+        $this->logger->debug("\n" . '*******************************************************');
+        $this->logger->debug('Sending curl request to: ' . $this->serviceUrl . $uri);
+        $this->logger->debug('Curl data: ' . $data_string);
+        $this->logger->debug('Curl verb: ' . $verb);
+        $this->logger->debug('*******************************************************' . "\n");
+
         $result=curl_exec($ch);
         curl_close($ch);
 

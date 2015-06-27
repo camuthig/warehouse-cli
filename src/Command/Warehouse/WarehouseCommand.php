@@ -4,6 +4,10 @@ use WarehouseCLI\Command\WarehouseCLICommand;
 
 class WarehouseCommand extends WarehouseCLICommand {
 
+    function brief() {
+        return "Interact with warehouses, getting a list of available and adding new";
+    }
+
     function init()
     {
         parent::init();

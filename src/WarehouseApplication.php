@@ -4,11 +4,12 @@ use CLIFramework\Application;
 
 class WarehouseApplication extends Application
 {
+    const NAME = 'Waho';
+    const VERSION = '0.1';
 
     /* init your application options here */
     public function options($opts)
     {
-        $opts->add('v|verbose', 'Verbose logging');
         parent::options($opts);
     }
 
@@ -17,6 +18,7 @@ class WarehouseApplication extends Application
     {
         parent::init();
         $this->command('warehouse', '\WarehouseCLI\Command\Warehouse\WarehouseCommand');
+        $this->command('product', '\WarehouseCLI\Command\Product\ProductCommand');
     }
 
 }
