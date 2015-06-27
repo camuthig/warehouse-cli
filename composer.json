@@ -1,0 +1,21 @@
+{
+    "name": "camuthig/warehouse-cli",
+    "description": "A command line tool for interacting with warehouses, products, stock and orders",
+    "authors": [
+        {
+            "name": "Chris Muthig",
+            "email": "camuthig@gmail.com"
+        }
+    ],
+    "require": {
+        "corneltek/cliframework": "2.5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.7.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "WarehouseCLI\\": "src/"
+        }
+    }
+}
