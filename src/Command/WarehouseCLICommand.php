@@ -38,6 +38,11 @@ abstract class WarehouseCLICommand extends Command {
      * @param  array $input   An array of arrays, each containing keys matching the values of headers
      */
     public function printGrid($headers, $input) {
+
+		if (!empty($input['errorMessage'])) {
+			$this->logger->error($input['errorMessage']);
+			return;
+		}
         $columns = [];
         // Add the headers to the columns
         foreach ($headers as $index => $header) {
@@ -124,6 +129,12 @@ abstract class WarehouseCLICommand extends Command {
         $result=curl_exec($ch);
         curl_close($ch);
 
-        return json_decode($result, true);
+        $result = json_decode($result, true);
+
+		$this->logger->debug("\n" . '*******************************************************');
+		$this->logger->debug('Curl response data: ' . print_r($result,true));
+		$this->logger->debug("\n" . '*******************************************************');
+
+		return $result;
     }
 }
