@@ -19,7 +19,8 @@ class WarehouseApplication extends Application
         parent::init();
         $this->command('warehouse', '\WarehouseCLI\Command\Warehouse\WarehouseCommand');
         $this->command('product', '\WarehouseCLI\Command\Product\ProductCommand');
-  		$this->command('stock', '\WarehouseCLI\Command\Stock\StockCommand'); 
+        $this->command('stock', '\WarehouseCLI\Command\Stock\StockCommand');
+        $this->command('order', '\WarehouseCLI\Command\Order\OrderCommand');
     }
 
 }
