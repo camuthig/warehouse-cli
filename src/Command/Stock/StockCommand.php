@@ -13,6 +13,6 @@ class StockCommand extends WarehouseCLICommand {
         parent::init();
         // register your subcommand here ..
         $this->command('list', '\WarehouseCLI\Command\Stock\StockListCommand');
-        //$this->command('create', '\WarehouseCLI\Command\Stock\StockCreateCommand');
+        $this->command('create', '\WarehouseCLI\Command\Stock\StockCreateCommand');
     }
 }

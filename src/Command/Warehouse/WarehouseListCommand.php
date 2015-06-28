@@ -4,12 +4,6 @@ use WarehouseCLI\Command\WarehouseCLICommand;
 
 class WarehouseListCommand extends WarehouseCLICommand {
 
-    function options($opts)
-    {
-        // command options
-
-    }
-
     function execute()
     {
         // Create a client and send the request
