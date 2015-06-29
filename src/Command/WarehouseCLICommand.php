@@ -152,13 +152,23 @@ abstract class WarehouseCLICommand extends Command {
         $this->logger->debug('*******************************************************' . "\n");
 
         $result=curl_exec($ch);
+        $info = curl_getinfo($ch);
         curl_close($ch);
 
         $result = json_decode($result, true);
 
         $this->logger->debug("\n" . '*******************************************************');
+        $this->logger->debug('Curl response status: ' . print_r($info['http_code'], true));
         $this->logger->debug('Curl response data: ' . print_r($result,true));
         $this->logger->debug("\n" . '*******************************************************');
+
+        if ($info['http_code'] != 200 && empty($result)) {
+            // Something went wrong - is the server running?
+            $result = ['errorMessage' => 'Error communicating with server'];
+        } elseif ($info['http_code'] != 200 && !empty($result) && empty($result['errorMessage']) && empty($result['errorFields'])) {
+            // This one is really weird. The server gave us back some odd value on an error code
+            $result = ['errorMessage' => 'Error communicating with server'];
+        }
 
         return $result;
     }

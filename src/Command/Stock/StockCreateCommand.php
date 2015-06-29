@@ -23,6 +23,5 @@ class StockCreateCommand extends BasicCreateCommand {
             'count' => $count
         ];
         $this->create('stock', $jsonData);
-        }
     }
 }
