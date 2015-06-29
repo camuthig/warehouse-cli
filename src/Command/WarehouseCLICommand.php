@@ -19,8 +19,8 @@ abstract class WarehouseCLICommand extends Command {
      */
     private $formatter;
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct($parent = null) {
+        parent::__construct($parent);
         $this->serviceUrl = 'http://localhost:8000/api/';
         $this->formatter = new Formatter();
     }
@@ -38,11 +38,12 @@ abstract class WarehouseCLICommand extends Command {
      * @param  array $input   An array of arrays, each containing keys matching the values of headers
      */
     public function printGrid($headers, $input) {
+        // Handle errors first
+        if ($this->printServiceErrors($input)) {
+            return;
+        }
 
-		if (!empty($input['errorMessage'])) {
-			$this->logger->error($input['errorMessage']);
-			return;
-		}
+        // Get down to the good stuff
         $columns = [];
         // Add the headers to the columns
         foreach ($headers as $index => $header) {
@@ -77,6 +78,30 @@ abstract class WarehouseCLICommand extends Command {
             }
             $this->logger->newLine();
         }
+    }
+
+    /**
+     * Determine if the service response included errors and print the necessary
+     * messages to the console.
+     * @param  array $serviceBody   The array of json_decode'd message body from the service
+     * @return bool                 True if errors were found and written to console.
+     */
+    public function printServiceErrors($serviceBody) {
+        if (!empty($serviceBody['errorMessage'])) {
+            // Error message
+            $this->logger->error($serviceBody['errorMessage']);
+        } elseif (!empty($serviceBody['errorFields'])) {
+            // Specific fields were incorrect
+            foreach ($serviceBody['errorFields'] as $field => $errors) {
+                $this->logger->error($field . ': ' . implode(' ', $errors));
+            }
+        } else {
+            return false;
+        }
+
+        // This means we didn't help our "return false" else statement, and we
+        // definitely found errors from the service.
+        return true;
     }
 
     /**
@@ -131,10 +156,10 @@ abstract class WarehouseCLICommand extends Command {
 
         $result = json_decode($result, true);
 
-		$this->logger->debug("\n" . '*******************************************************');
-		$this->logger->debug('Curl response data: ' . print_r($result,true));
-		$this->logger->debug("\n" . '*******************************************************');
+        $this->logger->debug("\n" . '*******************************************************');
+        $this->logger->debug('Curl response data: ' . print_r($result,true));
+        $this->logger->debug("\n" . '*******************************************************');
 
-		return $result;
+        return $result;
     }
 }

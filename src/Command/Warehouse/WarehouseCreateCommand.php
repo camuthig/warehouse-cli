@@ -1,8 +1,8 @@
 <?php namespace WarehouseCLI\Command\Warehouse;
 
-use WarehouseCLI\Command\WarehouseCLICommand;
+use WarehouseCLI\Command\Common\BasicCreateCommand;
 
-class WarehouseCreateCommand extends WarehouseCLICommand {
+class WarehouseCreateCommand extends BasicCreateCommand {
 
     public function arguments($args) {
 
@@ -18,17 +18,6 @@ class WarehouseCreateCommand extends WarehouseCLICommand {
             'name'    => $name,
             'address' => $address
         ];
-        $response = $this->sendRequest('warehouses', $jsonData, 'POST');
-
-        // Print the output
-        if (!empty($response['errorMessage'])) {
-            $this->logger->error($response['errorMessage']);
-        } elseif (!empty($response['errorFields'])) {
-            foreach ($response['errorFields'] as $field => $errors) {
-                $this->logger->error($field . ': ' . implode(' ', $errors));
-            }
-        } else {
-            $this->logger->println($this->formatter->format('Success!', 'green'));
-        }
+        $this->create('warehouses', $jsonData);
     }
 }
