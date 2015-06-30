@@ -37,4 +37,6 @@ For example:
 Each command has help text if run without arguments. 
 
 ## Working Locally
-To test local changes, you can run ./bin/waho instead of using the phar.
+To test local changes, you can run ./bin/waho instead of using the phar. 
+
+To run against a locally running warehouse application, you need to change the src/WarehouseCLICommand.php serviceUrl in the constructor.
