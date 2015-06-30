@@ -23,5 +23,9 @@
         "classmap": [
             "tests/"
         ]
+    },
+    "bin": ["bin/waho"],
+    "archive": {
+        "exclude": ["*.phar"]
     }
 }

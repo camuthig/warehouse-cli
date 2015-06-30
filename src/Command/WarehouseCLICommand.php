@@ -21,7 +21,8 @@ abstract class WarehouseCLICommand extends Command {
 
     public function __construct($parent = null) {
         parent::__construct($parent);
-        $this->serviceUrl = 'http://localhost:8000/api/';
+        $this->serviceUrl = 'https://camuthig-waho.herokuapp.com/api/';
+        // $this->serviceUrl = "http://localhost:8000/api/";
         $this->formatter = new Formatter();
     }
 

@@ -9,7 +9,7 @@ class OrderListCommand extends WarehouseCLICommand {
         // Create a client and send the request
         $stocks = $this->sendRequest('orders');
 
-        $columns = ['id', 'warehouse_id', 'product_id', 'status'];
+        $columns = ['id', 'warehouse_id', 'product_id', 'status', 'address'];
         $this->printGrid($columns, $stocks);
     }
 }
